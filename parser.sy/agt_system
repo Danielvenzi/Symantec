@@ -1,0 +1,3 @@
+Event Time,Severity,Host Name,Category,Event Source,Event Description
+
+2018-04-02 08:18:21,Error,EST35330,Category: 0,SYLINK,Falha ao contatar o servidor por mais de 10 vezes.
