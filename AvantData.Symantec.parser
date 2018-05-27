@@ -58,39 +58,129 @@ filter {
 
 	if [type] == "proactive"
 	{
-		
+		csv {
+                                source => "message"
+                                columns => [ "Time Stamp","Risk Action","Computer Name","IP Address","Detection Type","First Seen","Application Name","Application Type","Application Version","Hash Type","Application Hash","Company Name","File Size","Sensitivity","Detection Score","COH Engine Version","Submission Recommendation","Permitted Application Reason","Disposition","Download Site","Web Domain","Downloaded By","Prevalence","Confidence","URL Tracking Status","Risk Level","Detection Source","Source","Risk Name","Occurrences","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
+                                separator => ","
+                        }
+
+		 kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
 	if [type] == "risk"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Time Stamp","Risk Action","IP Address","Computer Name","Source","Risk Name","Occurrences","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Last Update Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP" ]
+                                separator => ","
+                        }
+
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
 	if [type] == "scan"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Event Time","Scan ID","Begin Time","End Time","Status","Duration","Client User 1","Client User 2","Start Message","Stop Message","Command","Threats","Infected","Total Files","Omitted","Computer Name","IP Address","Domain Name","Group Name","Server Name" ]
+                                separator => ","
+                        }
+
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
 	if [type] == "security"
 	{
+		csv {
+                                source => "message"
+                                columns => [ ]
+                                separator => ","
+                        }
+		
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
+
 	}
 	
 	if [type] == "system"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Event Time","Severity","Host Name","Category","Event Source","Event Description" ]
+                                separator => ","
+                        }
+		
+		#kv {    source => "Begin Time"
+                #        value_split => ":"}
+		# mutate{remove_field => ["Begin Time"]}
+		# mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
 	if [type] == "traffic"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Event Time","Severity","Host Name","Local Host IP","Local Port","Local Host MAC","Remote Host IP","Remote Host Name","Remote Port","Remote Host MAC","Network Protocol","Traffic Direction","Begin Time","End Time","Occurrences","Application Name","Rule Name","Location","User Name","Domain Name","Action"]
+                                separator => ","
+                        }
+
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 	
 	if [type] == "agent"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Event Description","Host Name","User Name","Domain Name" ]
+                                separator => ","
+                        }
+
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
 	if [type] == "policy"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Admin Name","Event Description",Object Name"]
+                                separator => ","
+                        }
+		
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 
-	if [type] == "system"
+	if [type] == "system2"
 	{
+		csv {
+                                source => "message"
+                                columns => [ "Time Stamp","Severity","Site Name","Server Name","Event Description"]
+                                separator => ","
+                        }
+		
+		kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
 	}
 }
 
