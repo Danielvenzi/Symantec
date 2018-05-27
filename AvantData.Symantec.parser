@@ -1,0 +1,101 @@
+input {
+	stdin {
+		type => "behavior"
+	}	
+}
+
+filter {
+	
+	if [type] == "behavior"
+	{
+		csv {
+                                source => "message"
+                                columns => [ "Event Time", "Severity", "Host Name", "IP Address", "Action", "Description", "API", "Begin Time", "End Time", "Rule Name", "Caller Process ID", "Caller Process Name", "Return Address", "Return Module", "Parameter", "User Name", "Domain Name", "Action Type", "File Size", "Device ID"]
+                                separator => ","
+                        }
+
+		 
+		 kv {    source => "Begin Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["Begin Time"]}
+		 mutate{rename => {"Begin" => "Begin Time"}}
+
+		 kv {    source => "End Time"
+                        value_split => ":"}
+		 mutate{remove_field => ["End Time"]}
+		 mutate{rename => {"End" => "End Time"}}
+
+		 kv {    source => "Rule Name"
+                        value_split => ":"}
+		 mutate{remove_field => ["Rule Name"]}
+		 mutate{rename => {"Rule" => "Rule Name"}}
+
+		 kv {    source => "User Name"
+                        value_split => ":"}
+		 mutate{remove_field => ["User Name"]}
+		 mutate{rename => {"User" => "User Name"}}
+
+		 kv {    source => "Domain Name"
+                        value_split => ":"}
+		 mutate{remove_field => ["Domain Name"]}
+		 mutate{rename => {"Domain" => "Domain Name"}}
+
+		 kv {    source => "Action Type"
+                        value_split => ":"}
+		 mutate{remove_field => ["Action Type"]}
+		 mutate{rename => {"Action" => "Action Type"}}
+
+		 kv {    source => "File Size"
+                        value_split => ":"}
+		 mutate{remove_field => ["File Size"]}
+		 mutate{rename => {"(bytes)" => "File Size (bytes)"}}
+
+		 kv {    source => "Device ID"
+                        value_split => ":"}
+		 mutate{remove_field => ["Device ID"]}
+		 mutate{rename => {"ID" => "Device ID"}}
+	}
+
+	if [type] == "proactive"
+	{
+		
+	}
+
+	if [type] == "risk"
+	{
+	}
+
+	if [type] == "scan"
+	{
+	}
+
+	if [type] == "security"
+	{
+	}
+	
+	if [type] == "system"
+	{
+	}
+
+	if [type] == "traffic"
+	{
+	}
+	
+	if [type] == "agent"
+	{
+	}
+
+	if [type] == "policy"
+	{
+	}
+
+	if [type] == "system"
+	{
+	}
+}
+
+output {
+	stdout {
+		codec => rubydebug			
+	}
+}
