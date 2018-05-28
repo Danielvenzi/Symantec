@@ -35,16 +35,16 @@ filter {
 		 mutate{rename => {"ID" => "Hack Type"}}
 
 	kv {    source => "Remote Ports"
-                        value_split => "Port"
+                        value_split => "t"
 						field_split => "/"}
 		 mutate{remove_field => ["Remote Ports"]}
-		 mutate{rename => {"Port" => "Remote Port"}}
+		 #mutate{rename => {"Port" => "Remote Port"}}
 		
 	kv {    source => "Local Ports"
-                        value_split => "Port"
+                        value_split => "t"
 						field_split => "/"}
 		 mutate{remove_field => ["Local Ports"]}
-		 mutate{rename => {"Port" => "Local Port"}}
+		 #mutate{rename => {"Port" => "Local Port"}}
 
 	kv {    source => "Remote Host MAC"
                         value_split => ":"
