@@ -6,100 +6,11 @@ input {
 filter {
 	csv {
 		source => "message"
-		columns => [ "Event Time","Scan IDs","Begin Time","End Time","Status","Duration","Client User 1","Client User 2","Start Message","Stop Message","Commands","Threatss","Infecteds","Total Files","Omitteds","Computer Name","IP Addresse","Domain Name","Group Name","Server Name"]
+		columns => []
 		separator => ","
 	}
 
-	kv {    source => "Omitteds"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Omitteds"]}
-		
-	kv {    source => "Server Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Server Name"]}
-		mutate{rename => {"Server" => "Server Name"}}
-
-	kv {    source => "IP Addresse"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["IP Addresse"]}
-		mutate{rename => {"Address" => "IP Address"}}
-		
-	kv {    source => "Total Files"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Total Files"]}
-		mutate{rename => {"files" => "Total Files"}}
-
-	kv {    source => "Duration"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Duration"]}
-		mutate{rename => {"(seconds)" => "Duration (seconds)"}}
 	
-	kv {    source => "Threatss"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Threatss"]}
-		
-	kv {    source => "Begin Time"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Begin Time"]}
-		mutate{rename => {"Begin" => "Begin Time"}}
-
-	kv {    source => "Commands"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Commands"]}
-
-	kv {    source => "Group Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Group Name"]}
-		mutate{rename => {"Group" => "Group Name"}}
-
-	kv {    source => "Computer Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Computer Name"]}
-		mutate{rename => {"Computer" => "Computer Name Name"}}
-	
-	kv {    source => "Client User 2"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Client User 2"]}
-		mutate{rename => {"User2" => "Client User 2"}}
-
-	kv {    source => "Scan IDs"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Scan IDs"]}
-		mutate{rename => {"ID" => "Scan ID"}}
-
-	kv {    source => "Client User 1"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Client User 1"]}
-		mutate{rename => {"User1" => "Client User 1"}}
-
-	kv {    source => "Infecteds"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Infecteds"]}
-		
-	kv {    source => "End Time"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["End Time"]}
-		mutate{rename => {"End" => "End Time"}}
-
-	kv {    source => "Domain Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Domain Name"]}
 }
 
 output {
