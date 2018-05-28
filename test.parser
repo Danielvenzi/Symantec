@@ -87,7 +87,8 @@ filter {
 	mutate{rename => {"hash" => "Application Hash"}}
 
 	kv {    source => "Category Set"
-                        value_split => ":"}
+                value_split => ":"
+		field_split => "/"}
 	mutate{remove_field => ["Category Set"]}
 	mutate{rename => {"set" => "Category Set"}}
 
