@@ -6,7 +6,7 @@ input {
 filter {
 	csv {
 		source => "message"
-		columns => []
+		columns => ["Time Stamp","Severity"]
 		separator => ","
 	}
 
