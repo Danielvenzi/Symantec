@@ -6,15 +6,179 @@ input {
 filter {
 	csv {
 		source => "message"
-		columns => [ "Time Stamp", "Event", "IP Address", "Computer Name", "Source", "Risk Name", "Occurencies", "Program Name", "Unknown", "Actual Action", "Requested Action", "Secondary Action", "Event Time", "Inserteds", "End Time", "Last Update Time", "Domain", "Group Name", "Server Name" ,"User Name", "Source Computer", "Source IP Address", "Dispositions", "Download Site", "Web Domain", "Downloaded By", "Prevalencies", "Confidencies", "URL Tracking Statues", "Unknown", "First Seens", "Sensitivitie", "Unknown", "Application Hash", "Hash Type", "Company Name", "Application Name", "Application Version", "Application Type", "File Size", "Category Set", "Category Type"]
+		columns => [ "Time Stamp", "Event", "IP Addresse", "Computer Name", "Sources", "Risk Name", "Occurencies", "Program Name", "Unknown", "Actual Action", "Requested Action", "Secondary Action", "Event Time", "Inserteds", "End Time", "Last Update Time", "Domains", "Group Name", "Server Name" ,"User Name", "Source Computer", "Source IP Address", "Dispositions", "Download Site", "Web Domain", "Downloaded By", "Prevalencies", "Confidencies", "URL Tracking Statues", "Unknown", "First Seens", "Sensitivitie", "Unknown", "Application Hash", "Hash Type", "Company Name", "Application Name", "Application Version", "Application Type", "File Size", "Category Set", "Category Type"]
 		separator => ","
 	}
 
 
-	#kv {    source => "Domain Name"
- #                       value_split => ":"}
-	#mutate{remove_field => ["Domain Name"]}
-	#mutate{rename => {"Domain" => "Domain Name"}}
+	kv {    source => "Application Type"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Type"]}
+	mutate{rename => {"type" => "Application Type"}}
+
+	kv {    source => "Last Update Time"
+                        value_split => ":"}
+	mutate{remove_field => ["Last Update Time"]}
+	mutate{rename => {"time" => "Last Update Time"}}
+
+	kv {    source => "Dispositions"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Type"]}
+	
+	kv {    source => "Confidencies"
+                        value_split => ":"}
+	mutate{remove_field => ["Confidencies"]}
+
+	kv {    source => "URL Tracking Statues"
+                        value_split => ":"}
+	mutate{remove_field => ["URL Tracking Statues"]}
+	
+	kv {    source => "Risk Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Risk Name"]}
+	mutate{rename => {"name" => "Risk Name"}}
+
+	kv {    source => "Sources"
+                        value_split => ":"}
+	mutate{remove_field => ["Sources"]}
+	
+	kv {    source => "Secondary Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Secondary Action"]}
+	mutate{rename => {"action" => "Secondary Action"}}
+
+	kv {    source => "IP Addresse"
+                        value_split => ":"}
+	mutate{remove_field => ["IP Addresse"]}
+	mutate{rename => {"Address" => "IP Address"}}
+
+	kv {    source => "Prevalencies"
+                        value_split => ":"}
+	mutate{remove_field => ["Prevalencies"]}
+	
+	kv {    source => "File Size"
+                        value_split => ":"}
+	mutate{remove_field => ["File Size"]}
+	mutate{rename => {"(bytes)" => "File Size (bytes)"}}
+
+	kv {    source => "Requested Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Requested Action"]}
+	mutate{rename => {"action" => "Requested Action"}}
+
+	kv {    source => "Computer Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Computer Name"]}
+	mutate{rename => {"name" => "Computer Name"}}
+
+	kv {    source => "Category Type"
+                        value_split => ":"}
+	mutate{remove_field => ["Category Type"]}
+	mutate{rename => {"type" => "Category Type"}}
+
+	kv {    source => "Web Domain"
+                        value_split => ":"}
+	mutate{remove_field => ["Web Domain"]}
+	mutate{rename => {"domain" => "Web Domain"}}
+
+	kv {    source => "Application Hash"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Hash"]}
+	mutate{rename => {"hash" => "Application Hash"}}
+
+	kv {    source => "Category Set"
+                        value_split => ":"}
+	mutate{remove_field => ["Category Set"]}
+	mutate{rename => {"set" => "Category Set"}}
+
+	kv {    source => "Application Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Name"]}
+	mutate{rename => {"name" => "Application Name"}}
+
+	kv {    source => "End Time"
+                        value_split => ":"}
+	mutate{remove_field => ["End Time"]}
+	mutate{rename => {"End" => "End Time"}}
+
+	kv {    source => "Source IP Address"
+                        value_split => ":"}
+	mutate{remove_field => ["Source IP Address"]}
+	mutate{rename => {"IP" => "Source IP Address"}}
+
+	kv {    source => "First Seens"
+                        value_split => ":"}
+	mutate{remove_field => ["First Seens"]}
+	mutate{rename => {"Seen" => "First Seen"}}
+
+	kv {    source => "Server Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Server Name"]}
+	mutate{rename => {"Server" => "Server Name"}}
+
+	kv {    source => "Download Site"
+                        value_split => ":"}
+	mutate{remove_field => ["Download Site"]}
+	mutate{rename => {"site" => "Download Site"}}
+
+	kv {    source => "Download By"
+                        value_split => ":"}
+	mutate{remove_field => ["Download By"]}
+	mutate{rename => {"by" => "Download By"}}
+
+	kv {    source => "Event Time"
+                        value_split => ":"}
+	mutate{remove_field => ["Event Time"]}
+	mutate{rename => {"time" => "Event Time"}}
+
+	kv {    source => "User Name"
+                        value_split => ":"}
+	mutate{remove_field => ["User Name"]}
+	mutate{rename => {"Name" => "User Name"}}
+
+	kv {    source => "Source Computer"
+                        value_split => ":"}
+	mutate{remove_field => ["Source Computer"]}
+	mutate{rename => {"computer" => "Source Computer"}}
+
+	kv {    source => "Hash Type"
+                        value_split => ":"}
+	mutate{remove_field => ["Hash Type"]}
+	mutate{rename => {"type" => "Hash Type"}}
+
+	kv {    source => "Company Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Company Name"]}
+	mutate{rename => {"name" => "Company Name"}}
+
+	kv {    source => "Group Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Group Name"]}
+	mutate{rename => {"Group" => "Group Name"}}
+
+
+	kv {    source => "Actual Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Actual Action"]}
+	mutate{rename => {"action" => "Actual Action"}}
+
+	kv {    source => "Inserteds"
+                        value_split => ":"}
+	mutate{remove_field => ["Inserteds"]}
+	
+	kv {    source => "Domains"
+                        value_split => ":"}
+	mutate{remove_field => ["Domains"]}
+	
+	kv {    source => "Sensitivitie"
+                        value_split => ":"}
+	mutate{remove_field => ["Sensitivitie"]}
+	
+	kv {    source => "Occurencies"
+                        value_split => ":"}
+	mutate{remove_field => ["Occurencies"]}
+	
+
 
 }
 
