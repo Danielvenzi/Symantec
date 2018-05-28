@@ -1,0 +1,25 @@
+input {
+	stdin {
+	}
+}
+
+filter {
+	csv {
+		source => "message"
+		columns => [ "Time Stamp","Risk Action","IP Address","Computer Name","Source","Risk Name","Occurrences","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Last Update Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
+		separator => ","
+	}
+
+
+	#kv {    source => "Domain Name"
+ #                       value_split => ":"}
+	#mutate{remove_field => ["Domain Name"]}
+	#mutate{rename => {"Domain" => "Domain Name"}}
+
+}
+
+output {
+	stdout {
+		codec => rubydebug
+	}
+}
