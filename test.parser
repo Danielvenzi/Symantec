@@ -26,7 +26,7 @@ filter {
 	kv {    source => "Dispositions"
                         value_split => ":"
 						field_split => "/"}
-	mutate{remove_field => ["Application Type"]}
+	mutate{remove_field => ["Dispositions"]}
 	
 	kv {    source => "Confidencies"
                         value_split => ":"
@@ -144,11 +144,11 @@ filter {
 	mutate{remove_field => ["Download Site"]}
 	mutate{rename => {"site" => "Download Site"}}
 
-	kv {    source => "Download By"
+	kv {    source => "Downloaded By"
                         value_split => ":"
 						field_split => "/"}
-	mutate{remove_field => ["Download By"]}
-	mutate{rename => {"by" => "Download By"}}
+	mutate{remove_field => ["Downloaded By"]}
+	mutate{rename => {"by" => "Downloaded By"}}
 
 	kv {    source => "Event Time"
                         value_split => ":"
