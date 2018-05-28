@@ -6,7 +6,7 @@ input {
 filter {
 	csv {
 		source => "message"
-		columns => [ "Time Stamp","Risk Action","IP Address","Computer Name","Source","Risk Name","Occurrences","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Last Update Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
+		columns => [ "Time Stamp", "Event", "IP Address", "Computer Name", "Source", "Risk Name", "Occurencies", "Program Name", "Unknown", "Actual Action", "Requested Action", "Secondary Action", "Event Time", "Inserteds", "End Time", "Last Update Time", "Domain", "Group Name", "Server Name" ,"User Name", "Source Computer", "Source IP Address", "Dispositions", "Download Site", "Web Domain", "Downloaded By", "Prevalencies", "Confidencies", "URL Tracking Statues", "Unknown", "First Seens", "Sensitivitie", "Unknown", "Application Hash", "Hash Type", "Company Name", "Application Name", "Application Version", "Application Type", "File Size", "Category Set", "Category Type"]
 		separator => ","
 	}
 
