@@ -1,0 +1,192 @@
+input {
+	stdin {
+	}
+}
+
+filter {
+	csv {
+		source => "message"
+		columns => [ "Time Stamp","Risk Action","Computer Name","IP Addresse","Detection Type","First Seens","Application Name","Application Type","Application Version","Hash Type","Application Hash","Company Name","File Size","Sensitivitie","Detection Score","COH Engine Versions","Submission Recommendation","Permitted Application Reason","Dispositions","Download Site","Web Domain","Downloaded By","Prevalences","Confidences","URL Tracking Status","Risk Levels","Detection Sources","Sources","Risk Names","Occurrencies","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
+		separator => ","
+	}
+
+
+	kv {    source => "Application Type"
+                       value_split => ":"}
+	mutate{remove_field => ["Application Type"]}
+	mutate{rename => {"type" => "Application Type"}}
+
+	kv {    source => "Risk Levels"
+                        value_split => ":"}
+	mutate{remove_field => ["Risk Levels"]}
+	mutate{rename => {"Level" => "Risk Level"}}
+
+	kv {    source => "Source Computer IP"
+                        value_split => ":"}
+	mutate{remove_field => ["Source Computer IP"]}
+	mutate{rename => {"IP" => "Source Computer IP"}}	
+
+	kv {    source => "Prevalences"
+                        value_split => ":"}
+	mutate{remove_field => ["Prevalences"]}
+	
+	kv {    source => "Detection Sources"
+                        value_split => ":"}
+	mutate{remove_field => ["Detection Sources"]}
+	mutate{rename => {"type" => "Detection Source"}}
+
+	kv {    source => "Occurrencies"
+                        value_split => ":"}
+	mutate{remove_field => ["Occurrencies"]}
+	
+	kv {    source => "Risk Names"
+                        value_split => ":"}
+	mutate{remove_field => ["Risk Names"]}
+	mutate{rename => {"name" => "Risk Name"}}
+	
+	kv {    source => "Sources"
+                        value_split => ":"}
+	mutate{remove_field => ["Sources"]}
+	
+	kv {    source => "Source Computer Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Source Computer Name"]}
+	mutate{rename => {"computer" => "Source Computer Name"}}
+
+	kv {    source => "Secondary Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Secondary Action"]}
+	mutate{rename => {"action" => "Secondary Action"}}
+
+	kv {    source => "IP Addresse"
+                        value_split => ":"}
+	mutate{remove_field => ["IP Addresse"]}
+	mutate{rename => {"Address" => "IP Address"}}
+	
+	kv {    source => "File Size"
+                        value_split => ":"}
+	mutate{remove_field => ["File Size"]}
+	mutate{rename => {"(bytes)" => "File Size (bytes)"}}
+
+	kv {    source => "Requested Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Requested Action"]}
+	mutate{rename => {"action" => "Requested Action"}}
+
+	kv {    source => "Confidences"
+                        value_split => ":"}
+	mutate{remove_field => ["Confidences"]}
+
+	kv {    source => "Computer Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Computer Name"]}
+	mutate{rename => {"name" => "Computer Name"}}
+
+	kv {    source => "Web Domain"
+                        value_split => ":"}
+	mutate{remove_field => ["Web Domain"]}
+	mutate{rename => {"domain" => "Web Domain"}}
+
+	kv {    source => "Application Hash"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Hash"]}
+	mutate{rename => {"hash" => "Application Hash"}}
+
+	kv {    source => "Application Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Name"]}
+	mutate{rename => {"name" => "Application Name"}}
+
+	kv {    source => "Event Insert Time"
+                        value_split => ":"}
+	mutate{remove_field => ["Event Insert Time"]}
+	mutate{rename => {"Inserted" => "Event Insert Time"}}
+
+	kv {    source => "First Seens"
+                        value_split => ":"}
+	mutate{remove_field => ["First Seens"]}
+
+	kv {    source => "End Time"
+                        value_split => ":"}
+	mutate{remove_field => ["End Time"]}
+	mutate{rename => {"End" => "End Time"}}
+
+	kv {    source => "Download Site"
+                        value_split => ":"}
+	mutate{remove_field => ["Download Site"]}
+	mutate{rename => {"site" => "Download Site"}}
+
+	kv {    source => "Downloaded By"
+                        value_split => ":"}
+	mutate{remove_field => ["Downloaded By"]}
+	mutate{rename => {"by" => "Downloaded By"}}
+
+	kv {    source => "Server Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Server Name"]}
+	mutate{rename => {"Server" => "Server Name"}}
+
+	kv {    source => "Event Time"
+                        value_split => ":"}
+	mutate{remove_field => ["Event Time"]}
+	mutate{rename => {"time" => "Event Time"}}
+
+	kv {    source => "Hash Type"
+                        value_split => ":"}
+	mutate{remove_field => ["Hash Type"]}
+	mutate{rename => {"type" => "Hash Type"}}
+
+	kv {    source => "Application Version"
+                        value_split => ":"}
+	mutate{remove_field => ["Application Version"]}
+	mutate{rename => {"version" => "Application Version"}}
+
+	kv {    source => "Company Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Company Name"]}
+	mutate{rename => {"name" => "Company Name"}}
+
+	kv {    source => "Sensitivitie"
+                        value_split => ":"}
+	mutate{remove_field => ["Sensitivitie"]}
+	
+	kv {    source => "COH Engine Versions"
+                        value_split => ":"}
+	mutate{remove_field => ["COH Engine Versions"]}
+	
+	kv {    source => "Permitted Application Reason"
+                        value_split => ":"}
+	mutate{remove_field => ["Permitted Application Reason"]}
+	mutate{rename => {"reason" => "Permitted Application Reason"}}
+
+	kv {    source => "Group Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Group Name"]}
+	mutate{rename => {"Group" => "Group Name"}}
+
+	kv {    source => "Dispositions"
+                        value_split => ":"}
+	mutate{remove_field => ["Dispositions"]}
+	
+	kv {    source => "Detection Type"
+                        value_split => ":"}
+	mutate{remove_field => ["Detection Type"]}
+	mutate{rename => {"type" => "Detection Type"}}
+
+	kv {    source => "Actual Action"
+                        value_split => ":"}
+	mutate{remove_field => ["Actual Action"]}
+	mutate{rename => {"action" => "Actual Action"}}
+
+	kv {    source => "Domain Name"
+                        value_split => ":"}
+	mutate{remove_field => ["Domain Name"]}
+	mutate{rename => {"Domain" => "Domain Name"}}
+
+}
+
+output {
+	stdout {
+		codec => rubydebug
+	}
+}
