@@ -6,7 +6,7 @@ input {
 filter {
 	csv {
 		source => "message"
-		columns => [ "Event Time","Scan ID","Begin Time","End Time","Status","Duration","Client User 1","Client User 2","Start Message","Stop Message","Command","Threats","Infected","Total Files","Omitted","Computer Name","IP Address","Domain Name","Group Name","Server Name"]
+		columns => [ "Event Time","Scan IDs","Begin Time","End Time","Status","Duration","Client User 1","Client User 2","Start Message","Stop Message","Command","Threatss","Infecteds","Total Files","Omitteds","Computer Name","IP Addresse","Domain Name","Group Name","Server Name"]
 		separator => ","
 	}
 
