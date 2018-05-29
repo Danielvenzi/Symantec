@@ -860,15 +860,34 @@ filter {
 
 	if [type] == "policy" {
 		csv {
-                                source => "message"
-                                columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Admin Name","Event Description",Object Name"]
-                                separator => ","
-                        }
-		
-		kv {    source => "Begin Time"
-                        value_split => ":"}
-		 mutate{remove_field => ["Begin Time"]}
-		 mutate{rename => {"Begin" => "Begin Time"}}
+			source => "message"
+			columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Admin Name","Event Description","Object Name"]
+			separator => ","
+		}
+
+		kv {    source => "Admin Name"
+			                        value_split => ":"
+									field_split => "/"}
+				mutate{remove_field => ["Admin Name"]}
+				mutate{rename => {"Admin" => "Admin Name"}}
+
+		kv {    source => "Server Name"
+			                        value_split => ":"
+									field_split => "/"}
+				mutate{remove_field => ["Server Name"]}
+				mutate{rename => {"Server" => "Server Name"}}
+
+		kv {    source => "Site Name"
+			                        value_split => ":"
+									field_split => "/"}
+				mutate{remove_field => ["Site Name"]}
+				mutate{rename => {"Site" => "Site Name"}}
+
+		kv {    source => "Domain Name"
+			                        value_split => ":"
+									field_split => "/"}
+				mutate{remove_field => ["Site Name"]}
+				mutate{rename => {"Domain" => "Domain Name"}}
 	}
 
 	if [type] == "system2" {
