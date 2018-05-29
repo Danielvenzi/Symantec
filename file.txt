@@ -1,1 +1,1 @@
-2018-04-02 15:19:26,Minor,EST29192,Local: 0.0.0.0,Local: 1900,Local: 33330000000C,Remote: 0.0.0.0,Remote: ,Remote: 61774,Remote: 74867AFD3B99,UDP,Inbound,Begin: 2018-04-02 15:18:18,End: 2018-04-02 15:18:24,Occurrences: 3,Application: ,Rule: Block UPnP Discovery,Location: Default,User: leonardo.miguel,Domain: MCTIC,Action: Blocked
+2018-04-02 15:22:02,Site: Site PVW012,Server: PVW012,Domain: Default,The management server received the client log successfully,EST31533,eliana.ramos,MCTIC.GOV.BR
