@@ -9,7 +9,18 @@ filter {
 			columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Event Description","Host Name","User Name","Domain Name"]
 			separator => ","
 		}
-	
+
+	kv {    source => "Server Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Server Name"]}
+		mutate{rename => {"Server" => "Server Name"}}	
+
+	kv {    source => "Site Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Site Name"]}
+		mutate{rename => {"Site" => "Site Name"}}
 }
 
 output {
