@@ -892,16 +892,23 @@ filter {
 
 	if [type] == "system2" {
 		csv {
-                                source => "message"
-                                columns => [ "Time Stamp","Severity","Site Name","Server Name","Event Description"]
-                                separator => ","
-                        }
-		
-		kv {    source => "Begin Time"
-                        value_split => ":"}
-		 mutate{remove_field => ["Begin Time"]}
-		 mutate{rename => {"Begin" => "Begin Time"}}
-	}
+			source => "message"
+			columns => [ "Time Stamp","Severity","Site Name","Server Name","Event Description"]
+			separator => ","
+		}
+
+		kv {    source => "Server Name"
+	                        value_split => ":"
+							field_split => "/"}
+			 mutate{remove_field => ["Server Name"]}
+			 mutate{rename => {"Server" => "Server Name"}}
+
+		kv {    source => "Site Name"
+	                        value_split => ":"
+							field_split => "/"}
+			 mutate{remove_field => ["Site Name"]}
+			 mutate{rename => {"Site" => "Site Name"}}
+		}
 }
 
 output {
