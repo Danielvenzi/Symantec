@@ -5,128 +5,104 @@ input {
 
 filter {
 	csv {
-		source => "message"
-		columns => ["Event Time","Severity","Host Name","Event Description","Local Host IP","Local Host MAC","Remote Host Name","Remote Host IP","Remote Host MAC","Traffic Direction","Network Protocol","Hack Type","Begin Time","End Time","Occurrencies","Application Name","Locations","User Name","Domain Name","Local Ports","Remote Ports","CIDS Signature Identification","CIDS Signature String","CIDS Signature SubIDs","Instrusion URLs","Intrusion Payload URLs"]
-		separator => ","
-	}
+			source => "message"
+			columns => [ "Event Time","Severity","Host Name","Local Host IP","Local Port","Local Host MAC","Remote Host IP","Remote Host Name","Remote Port","Remote Host MAC","Network Protocol","Traffic Direction","Begin Time","End Time","Occurrencies","Application Name","Rule Name","Locations","User Name","Domain Name","Actions"]
+			separator => ","
+		}
 
-	kv {    source => "Local Host IP"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Local Host IP"]}
-		 mutate{rename => {"Local" => "Local Host IP"}}	
+		kv {    source => "Local Host IP"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Local Host IP"]}
+		mutate{rename => {"Local" => "Local Host IP"}}
 
-	kv {    source => "CIDS Signature String"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["CIDS Signature String"]}
-		 mutate{rename => {"string" => "CIDS Signature String"}}
+		kv {    source => "Actions"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Actions"]}
 
-	kv {    source => "CIDS Signature Identification"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["CIDS Signature Identification"]}
-		 mutate{rename => {"ID" => "CIDS Signature ID"}}
+		kv {    source => "Remote Host MAC"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Remote Host MAC"]}
+		mutate{rename => {"Remote" => "Remote Host MAC"}}
 
-	kv {    source => "Hack Type"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Hack Type"]}
-		 mutate{rename => {"ID" => "Hack Type"}}
+		kv {    source => "Occurrencies"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Occurrencies"]}
 
-	kv {    source => "Remote Ports"
-                        value_split => "Port"
-						field_split => "/"}
-		 mutate{remove_field => ["Remote Ports"]}
-		 #mutate{rename => {"Port" => "Remote Port"}}
-		
-	kv {    source => "Local Ports"
-                        value_split => "Port"
-						field_split => "/"}
-		 mutate{remove_field => ["Local Ports"]}
-		 #mutate{rename => {"Port" => "Local Port"}}
+		kv {    source => "Remote Port"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Remote Port"]}
+		mutate{rename => {"Remote" => "Remote Port"}}
 
-	kv {    source => "Remote Host MAC"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Remote Host MAC"]}
-		 mutate{rename => {"Remote" => "Remote Host MAC"}}	
+		kv {    source => "Remote Host Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Remote Host Name"]}
+		mutate{rename => {"Remote" => "Remote Host Name"}}
 
-	kv {    source => "Occurrencies"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Occurrencies"]}
-		 
-	kv {    source => "Intrusion Payload URLs"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Instrusion Payload URLs"]}
-		 mutate{rename => {"URL" => "Intrusion Payload URL"}}
+		kv {    source => "Rule Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Rule Name"]}
+		mutate{rename => {"Rule" => "Rule Name"}}
 
-	kv {    source => "Intrusion URLs"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Intrusion URLs"]}
-		 mutate{rename => {"URL" => "Intrusion URL"}}
-		 
-	kv {    source => "CIDS Signature SubIDs"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["CIDS Signature SubIDs"]}
-		 mutate{rename => {"SubID" => "CIDS Signature SubID"}}	
+		kv {    source => "Application Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Application Name"]}
+		mutate{rename => {"Application" => "Application Name"}}
 
-	kv {    source => "Remote Host Name"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Remote Host Name"]}
-		 mutate{rename => {"Remote" => "Remote Host Name"}}
+		kv {    source => "End Time"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["End Time"]}
+		mutate{rename => {"End" => "End Time"}}
 
-	kv {    source => "Application Name"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Application Name"]}
-		 mutate{rename => {"Application" => "Application Name"}}
+		kv {    source => "User Name"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["User Name"]}
+		mutate{rename => {"User" => "User Name"}}
 
-	kv {    source => "End Time"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["End Time"]}
-		 mutate{rename => {"End" => "End Time"}}
+		kv {    source => "Local Port"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Local Port"]}
+		mutate{rename => {"Local" => "Local Port"}}
 
-	kv {    source => "User Name"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["User Name"]}
-		 mutate{rename => {"User" => "User Name"}}
+		kv {    source => "Local Host MAC"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Local Host MAC"]}
+		mutate{rename => {"Local" => "Local Host MAC"}}
 
-	kv {    source => "Local Host MAC"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Local Host MAC"]}
-		 mutate{rename => {"Local" => "Local Host MAC"}}
+		kv {    source => "Remote Host IP"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Remote Host IP"]}
+		mutate{rename => {"Remote" => "Remote Host IP"}}
 
-	kv {    source => "Remote Host IP"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Remote Host IP"]}
-		 mutate{rename => {"Remote" => "Remote Host IP"}}
+		kv {    source => "Begin Time"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Begin Time"]}
+		mutate{rename => {"Begin" => "Begin Time"}}
 
-	kv {    source => "Begin Time"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Begin Time"]}
-		 mutate{rename => {"Begin" => "Begin Time"}}
+		kv {    source => "Locations"
+	                        value_split => ":"
+							field_split => "/"}
+		mutate{remove_field => ["Locations"]}
 
-	kv {    source => "Locations"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Locations"]}
-		 
-	kv {    source => "Domain Name"
-                        value_split => ":"
-						field_split => "/"}
-		 mutate{remove_field => ["Domain Name"]}
-		 mutate{rename => {"Domain" => "Domain Name"}}
+
+		kv {    source => "Domain Name"
+ 	                       value_split => ":"
+						   field_split => "/"}
+		mutate{remove_field => ["Domain Name"]}
+		mutate{rename => {"Domain" => "Domain Name"}}
 	
 }
 
