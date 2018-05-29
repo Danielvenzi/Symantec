@@ -6,27 +6,11 @@ input {
 filter {
 	csv {
 			source => "message"
-			columns => [ "Time Stamp","Site Name","Server Name","Domains","Event Description","Host Name","User Name","Domain Name"]
+			columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Admin Name","Event Description","Object Name"]
 			separator => ","
 		}
 
-	kv {    source => "Server Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Server Name"]}
-		mutate{rename => {"Server" => "Server Name"}}	
-
-	kv {    source => "Site Name"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Site Name"]}
-		mutate{rename => {"Site" => "Site Name"}}
-
-	kv {    source => "Domains"
-	                        value_split => ":"
-							field_split => "/"}
-		mutate{remove_field => ["Domains"]}
-		
+	
 }
 
 output {

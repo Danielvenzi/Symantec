@@ -1,1 +1,1 @@
-2018-04-02 15:22:02,Site: Site PVW012,Server: PVW012,Domain: Default,The management server received the client log successfully,EST31533,eliana.ramos,MCTIC.GOV.BR
+2018-01-09 17:05:50,Site: Site PVW012,Server: PVW012,Domain: Default,Admin: admin,Policy has been edited: Changed location-independent policy or settings.,Client Policy
