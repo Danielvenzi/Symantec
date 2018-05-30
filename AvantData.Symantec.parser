@@ -1,6 +1,6 @@
 input {
 	stdin {
-		type => "proactive"
+		type => "risk"
 	}	
 }
 
@@ -66,7 +66,7 @@ filter {
 	if [type] == "proactive" {
 		csv {
 			source => "message"
-			columns => [ "Time Stamp","Risk Action","Computer Name","IP Addresse","Detection Type","First Seens","Application Name","Application Type","Application Version","Hash Type","Application Hash","Company Name","File Size","Sensitivitie","Detection Score","COH Engine Versions","Submission Recommendation","Permitted Application Reason","Dispositions","Download Site","Web Domain","Downloaded By","Prevalences","Confidences","URL Tracking Status","Risk Levels","Detection Sources","Sources","Risk Names","Occurrencies","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
+			columns => [ "Time Stamp","Risk Action","Computer Name","IP Addresse","Detection Type","First Seens","Application Name","Application Type","Application Version","Hash Type","Application Hash","Company Name","File Size","Sensitivitie","Detection Score","COH Engine Versions","Submission Recommendation","Permitted Application Reason","Dispositions","Download Site","Web Domain","Downloaded By","Prevalences","Confidences","URL Tracking Statuss","Risk Levels","Detection Sources","Sources","Risk Names","Occurrencies","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
 			separator => ","
 		}
 
@@ -278,6 +278,18 @@ filter {
 							field_split => "/"}
 		mutate{remove_field => ["Domain Name"]}
 		mutate{rename => {"Domain" => "Domain Name"}}	
+
+		kv {    source => "User Name"
+                               value_split => ":"
+                                                        field_split => "/"}
+                mutate{remove_field => ["User Name"]}
+                mutate{rename => {"User" => "User Name"}}
+
+		kv {    source => "URL Tracking Statuss"
+                               value_split => ":"
+                                                        field_split => "/"}
+                mutate{remove_field => ["URL Tracking Statuss"]}
+                mutate{rename => {"Status" => "URL Tracking Status"}}	
 	}
 
 	if [type] == "risk"
