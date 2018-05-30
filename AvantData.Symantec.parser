@@ -1,12 +1,25 @@
 input {
 	stdin {
-		type => "risk"
+		type => "symantec"
 	}	
 }
 
 filter {
-	
-	if [type] == "behavior" {
+
+if [type] == "symantec" {
+
+	csv {
+                source => "message"
+                columns => ["c1","c2","c3","c4"]
+                autogenerate_column_names => true
+                separator => ","
+            }
+
+	ruby { code => "event.set('[colcount]',event.to_hash.length)"}
+
+
+	if [colcount] == 25 {
+
 		csv {
                                 source => "message"
                                 columns => [ "Event Time", "Severity", "Host Name", "IP Address", "Action", "Description", "API", "Begin Time", "End Time", "Rule Name", "Caller Process ID", "Caller Process Name", "Return Address", "Return Module", "Parameter", "User Name", "Domain Name", "Action Type", "File Size", "Device ID"]
@@ -61,9 +74,29 @@ filter {
 						field_split => "/"}
 		 mutate{remove_field => ["Device ID"]}
 		 mutate{rename => {"ID" => "Device ID"}}
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "proactive" {
+	if [colcount] == 49 {
 		csv {
 			source => "message"
 			columns => [ "Time Stamp","Risk Action","Computer Name","IP Addresse","Detection Type","First Seens","Application Name","Application Type","Application Version","Hash Type","Application Hash","Company Name","File Size","Sensitivitie","Detection Score","COH Engine Versions","Submission Recommendation","Permitted Application Reason","Dispositions","Download Site","Web Domain","Downloaded By","Prevalences","Confidences","URL Tracking Statuss","Risk Levels","Detection Sources","Sources","Risk Names","Occurrencies","File Path","Description","Actual Action","Requested Action","Secondary Action","Event Time","Event Insert Time","End Time","Domain Name","Group Name","Server Name","User Name","Source Computer Name","Source Computer IP"]
@@ -290,9 +323,30 @@ filter {
                                                         field_split => "/"}
                 mutate{remove_field => ["URL Tracking Statuss"]}
                 mutate{rename => {"Status" => "URL Tracking Status"}}	
+
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "risk"
+	if [colcount] == 47
 	{
 		csv {
 			source => "message"
@@ -305,13 +359,13 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Application Type"]}
-		mutate{rename => {"type" => "Application Type"}}
+		mutate{rename => {"Application type" => "Application Type"}}
 
 		kv {    source => "Last Update Time"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Last Update Time"]}
-		mutate{rename => {"time" => "Last Update Time"}}
+		mutate{rename => {"Last update time" => "Last Update Time"}}
 
 		kv {    source => "Dispositions"
 	                        value_split => ":"
@@ -332,7 +386,7 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Risk Name"]}
-		mutate{rename => {"name" => "Risk Name"}}
+		mutate{rename => {"Risk name" => "Risk Name"}}
 
 		kv {    source => "Sources"
 	                        value_split => ":"
@@ -366,43 +420,43 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Requested Action"]}
-		mutate{rename => {"action" => "Requested Action"}}
+		mutate{rename => {"Requested action" => "Requested Action"}}
 
 		kv {    source => "Computer Name"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Computer Name"]}
-		mutate{rename => {"name" => "Computer Name"}}
+		mutate{rename => {"Computer name" => "Computer Name"}}
 
 		kv {    source => "Category Type"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Category Type"]}
-		mutate{rename => {"type" => "Category Type"}}
+		mutate{rename => {"Category type" => "Category Type"}}
 
 		kv {    source => "Web Domain"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Web Domain"]}
-		mutate{rename => {"domain" => "Web Domain"}}
+		mutate{rename => {"Web domain" => "Web Domain"}}
 
 		kv {    source => "Application Hash"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Application Hash"]}
-		mutate{rename => {"hash" => "Application Hash"}}
+		mutate{rename => {"Application hash" => "Application Hash"}}
 
 		kv {    source => "Category Set"
 	                value_split => ":"
 			field_split => "/"}
 		mutate{remove_field => ["Category Set"]}
-		mutate{rename => {"set" => "Category Set"}}
+		mutate{rename => {"Category set" => "Category Set"}}
 
 		kv {    source => "Application Name"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Application Name"]}
-		mutate{rename => {"name" => "Application Name"}}
+		mutate{rename => {"Application name" => "Application Name"}}
 
 		kv {    source => "End Time"
 	                        value_split => ":"
@@ -432,13 +486,13 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Download Site"]}
-		mutate{rename => {"site" => "Download Site"}}
+		mutate{rename => {"Download site" => "Download Site"}}
 
 		kv {    source => "Downloaded By"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Downloaded By"]}
-		mutate{rename => {"by" => "Downloaded By"}}
+		mutate{rename => {"Downloaded by" => "Downloaded By"}}
 
 		kv {    source => "Event Time"
 	                        value_split => ":"
@@ -450,25 +504,25 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["User Name"]}
-		mutate{rename => {"Name" => "User Name"}}
+		mutate{rename => {"User" => "User Name"}}
 
 		kv {    source => "Source Computer"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Source Computer"]}
-		mutate{rename => {"computer" => "Source Computer"}}
+		mutate{rename => {"Source computer" => "Source Computer"}}
 
 		kv {    source => "Hash Type"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Hash Type"]}
-		mutate{rename => {"type" => "Hash Type"}}
+		mutate{rename => {"Hash type" => "Hash Type"}}
 
 		kv {    source => "Company Name"
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Company Name"]}
-		mutate{rename => {"name" => "Company Name"}}
+		mutate{rename => {"Company name" => "Company Name"}}
 
 		kv {    source => "Group Name"
 	                        value_split => ":"
@@ -481,7 +535,7 @@ filter {
 	                        value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Actual Action"]}
-		mutate{rename => {"action" => "Actual Action"}}
+		mutate{rename => {"Actual action" => "Actual Action"}}
 
 		kv {    source => "Inserteds"
  	                       value_split => ":"
@@ -502,9 +556,35 @@ filter {
  	                       value_split => ":"
 							field_split => "/"}
 		mutate{remove_field => ["Occurencies"]}
+
+		kv {    source => "Application Version"
+                                value_split => ":"
+                                                        field_split => "/"}
+                mutate{remove_field => ["Application Version"]}
+                mutate{rename => {"Application version" => "Application Version"}}
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "scan" {
+	if [colcount] == 25 {
 		csv {
 			source => "message"
 			columns => [ "Event Time","Scan IDs","Begin Time","End Time","Status","Duration","Client User 1","Client User 2","Start Message","Stop Message","Commands","Threatss","Infecteds","Total Files","Omitteds","Computer Name","IP Addresse","Domain Name","Group Name","Server Name"]
@@ -601,9 +681,30 @@ filter {
 		                        value_split => ":"
 								field_split => "/"}
 			mutate{remove_field => ["Domain Name"]}
+
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "security" {
+	if [colcount] == 31 {
 		csv {
 			source => "message"
 			columns => ["Event Time","Severity","Host Name","Event Description","Local Host IP","Local Host MAC","Remote Host Name","Remote Host IP","Remote Host MAC","Traffic Direction","Network Protocol","Hack Type","Begin Time","End Time","Occurrencies","Application Name","Locations","User Name","Domain Name","Local Ports","Remote Ports","CIDS Signature Identification","CIDS Signature String","CIDS Signature SubIDs","Instrusion URLs","Intrusion Payload URLs"]
@@ -728,9 +829,29 @@ filter {
 			 mutate{remove_field => ["Domain Name"]}
 			 mutate{rename => {"Domain" => "Domain Name"}}
 
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
+
 	}
 	
-	if [type] == "system" {
+	if [colcount] == 11 {
 		csv {
 			source => "message"
 			columns => ["Event Time","Severity","Host Name","Categories","Event Source","Event Description"]
@@ -741,9 +862,29 @@ filter {
                         value_split => ":"
 						field_split => "/"}
 		 mutate{remove_field => ["Categories"]}
+		
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "traffic" {
+	if [colcount] == 26 {
 		csv {
 			source => "message"
 			columns => [ "Event Time","Severity","Host Name","Local Host IP","Local Port","Local Host MAC","Remote Host IP","Remote Host Name","Remote Port","Remote Host MAC","Network Protocol","Traffic Direction","Begin Time","End Time","Occurrencies","Application Name","Rule Name","Locations","User Name","Domain Name","Actions"]
@@ -843,9 +984,29 @@ filter {
 						   field_split => "/"}
 		mutate{remove_field => ["Domain Name"]}
 		mutate{rename => {"Domain" => "Domain Name"}}
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 	
-	if [type] == "agent" {
+	if [colcount] == 13 {
 		csv {
 			source => "message"
 			columns => [ "Time Stamp","Site Name","Server Name","Domains","Event Description","Host Name","User Name","Domain Name"]
@@ -868,9 +1029,29 @@ filter {
 	 	                       value_split => ":"
 								field_split => "/"}
 			mutate{remove_field => ["Domains"]}
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "policy" {
+	if [colcount] == 12 {
 		csv {
 			source => "message"
 			columns => [ "Time Stamp","Site Name","Server Name","Domain Name","Admin Name","Event Description","Object Name"]
@@ -900,9 +1081,29 @@ filter {
 									field_split => "/"}
 				mutate{remove_field => ["Site Name"]}
 				mutate{rename => {"Domain" => "Domain Name"}}
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
 	}
 
-	if [type] == "system2" {
+	if [colcount] == 10 {
 		csv {
 			source => "message"
 			columns => [ "Time Stamp","Severity","Site Name","Server Name","Event Description"]
@@ -920,7 +1121,29 @@ filter {
 							field_split => "/"}
 			 mutate{remove_field => ["Site Name"]}
 			 mutate{rename => {"Site" => "Site Name"}}
-		}
+		
+
+		 mutate {
+                        remove_field => [       "c1", "c2", "c3", "c4",
+                                                                        "column1", "column2", "column3", "column4", "column5",
+                                                                        "column6", "column7", "column8", "column9", "column10",
+                                                                        "column11", "column12", "column13", "column14", "column15",
+                                                                        "column16", "column17", "column18", "column19", "column20",
+                                                                        "column21", "column22", "column23", "column24", "column25",
+                                                                        "column26", "column27", "column28", "column29", "column30",
+                                                                        "column31", "column32", "column33", "column34", "column35",
+                                                                        "column36", "column37", "column38", "column39", "column40",
+                                                                        "column41", "column42", "column43", "column44", "column45",
+                                                                        "column46", "column47", "column48", "column49", "column50",
+                                                                        "column51", "column52", "column53", "column54", "column55",
+                                                                        "column56", "column57", "column58", "column59", "column60",
+                                                                        "column61", "column62", "column63", "column64", "column65",
+                                                                        "column66", "column67", "column68", "column69", "column70",
+                                                                        "message", "@version", "colcount", "type", "host"
+                                                        ]
+                        }
+	}
+}
 }
 
 output {
