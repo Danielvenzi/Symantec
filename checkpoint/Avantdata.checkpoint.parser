@@ -1,0 +1,331 @@
+input {
+
+	stdin {
+		type => "checkpoint"
+	}
+
+}
+
+filter {
+
+	if [type] == "checkpoint" {
+
+		csv {
+                        source => "message"
+                        separator => ";"
+                    }	
+
+		ruby { code => "event.set('[colcount]',event.to_hash.length)"}
+	
+		if [colcount] == 30 {
+	
+			kv {    source => "column2"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column2"]}
+	
+			kv {    source => "column3"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column3"]}
+			
+			kv {    source => "column4"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column4"]}
+	
+			kv {    source => "column5"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column5"]}
+	
+			kv {    source => "column6"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column6"]}
+	
+			kv {    source => "column7"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column7"]}
+	
+			kv {    source => "column8"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column8"]}
+	
+			kv {    source => "column9"
+	                        value_split => ":"
+	                        field_split => "/"
+	                   }
+			mutate{remove_field => ["column9"]}
+	
+			kv {    source => "column10"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column10"]}
+	
+			kv {    source => "column11"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column11"]}
+		
+			kv {    source => "column12"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column12"]}
+	
+			kv {    source => "column13"
+       		                 value_split => ":"
+       		                 field_split => "/"
+			   }
+			mutate{remove_field => ["column13"]}
+
+			kv {    source => "column14"
+        	                value_split => ":"
+        	                field_split => "/"
+			   }
+			mutate{remove_field => ["column14"]}
+	
+			kv {    source => "column15"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column15"]}
+	
+			kv {    source => "column16"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column16"]}
+	
+			kv {    source => "column17"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column17"]}
+	
+			kv {    source => "column18"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column18"]}
+	
+			kv {    source => "column19"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column19"]}
+	
+			kv {    source => "column20"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column20"]}
+	
+			kv {    source => "column21"
+	                        value_split => ":"
+	       	                field_split => "/"
+			   }
+			mutate{remove_field => ["column21"]}
+	
+			kv {    source => "column22"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column22"]}
+	
+			kv {    source => "column23"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column23"]}
+	
+			kv {    source => "column24"
+	                        value_split => ":"
+	                        field_split => "/"
+			   }
+			mutate{remove_field => ["column24"]}
+			mutate{remove_field => ["column25"]}
+		}
+
+		if [colcount] == 33 {
+		
+			kv {    source => "column2"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column2"]}
+			
+			kv {    source => "column3"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column3"]}
+			
+			kv {    source => "column4"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column4"]}
+
+			kv {    source => "column5"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column5"]}
+
+			kv {    source => "column6"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column6"]}
+
+			kv {    source => "column7"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column7"]}
+
+			kv {    source => "column8"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column8"]}
+
+			kv {    source => "column9"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column9"]}
+		
+			kv {    source => "column10"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column10"]}
+
+			kv {    source => "column11"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column11"]}
+
+			kv {    source => "column12"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column12"]}
+			
+			kv {    source => "column13"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column13"]}
+
+			kv {    source => "column14"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column14"]}
+
+			kv {    source => "column15"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column15"]}
+
+			kv {    source => "column16"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column16"]}
+
+			kv {    source => "column17"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column17"]}
+
+			kv {    source => "column18"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column18"]}
+
+			kv {    source => "column19"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column19"]}
+
+			kv {    source => "column20"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column20"]}
+
+			kv {    source => "column21"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column21"]}
+
+			kv {    source => "column22"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column22"]}
+
+			kv {    source => "column23"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column23"]}
+
+			kv {    source => "column24"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column24"]}
+
+			kv {    source => "column25"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column25"]}
+
+			kv {    source => "column26"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column26"]}
+
+			kv {    source => "column27"
+                                value_split => ":"
+                                field_split => "/"
+                           }
+                        mutate{remove_field => ["column27"]}
+			mutate{remove_field => ["column28"]}
+		}	
+	
+	}
+}
+
+output {
+	
+	stdout {
+		codec => rubydebug
+	}
+
+}
