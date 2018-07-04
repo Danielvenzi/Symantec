@@ -1,0 +1,28 @@
+input {
+
+	stdin {
+		type => "checkpoint"
+	}
+
+}
+
+filter {
+
+	if [type] == "checkpoint" {
+
+		csv {
+                        source => "message"
+                        separator => ";"
+                    }	
+		
+	
+	}
+}
+
+output {
+	
+	stdout {
+		codec => rubydebug
+	}
+
+}

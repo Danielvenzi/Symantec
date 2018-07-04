@@ -24,138 +24,162 @@ filter {
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column2"]}
+			mutate{rename => {" Uuid" => "UUID"}}
 	
 			kv {    source => "column3"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column3"]}
+			mutate{rename => {" SequenceNum" => "Sequence Number"}}
 			
 			kv {    source => "column4"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column4"]}
+			mutate{rename => {" Flags" => "Flags"}}
 	
 			kv {    source => "column5"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column5"]}
+			mutate{rename => {" Action" => "Action"}}
 	
 			kv {    source => "column6"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column6"]}
+			mutate{rename => {" Origin" => "Origin"}}
 	
 			kv {    source => "column7"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column7"]}
+			mutate{rename => {" IfDir" => "IfDir"}}
 	
 			kv {    source => "column8"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column8"]}
+			mutate{rename => {" InterfaceName" => "Interface Name"}}
 	
 			kv {    source => "column9"
 	                        value_split => ":"
 	                        field_split => "/"
 	                   }
 			mutate{remove_field => ["column9"]}
+			mutate{rename => {" Alert" => "Alert"}}
 	
 			kv {    source => "column10"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column10"]}
+			mutate{rename => {" LogId" => "LogID"}}
 	
 			kv {    source => "column11"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column11"]}
+			mutate{rename => {" OririginSicName" => "OriginSicName"}}
 		
 			kv {    source => "column12"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column12"]}
+			mutate{rename => {" OriginSicName" => "OriginSicNames"}}
 	
 			kv {    source => "column13"
        		                 value_split => ":"
        		                 field_split => "/"
 			   }
 			mutate{remove_field => ["column13"]}
+			mutate{rename => {" log_type" => "Log Type"}}
 
 			kv {    source => "column14"
         	                value_split => ":"
         	                field_split => "/"
 			   }
 			mutate{remove_field => ["column14"]}
+			mutate{rename => {" is_first_for_luuid" => "IsFirstForLUUID"}}
 	
 			kv {    source => "column15"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column15"]}
+			mutate{rename => {" description" => "Description"}}
 	
 			kv {    source => "column16"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column16"]}
+			mutate{rename => {" status" => "Status"}}
 	
 			kv {    source => "column17"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column17"]}
+			mutate{rename => {" version" => "Version"}}
 	
 			kv {    source => "column18"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column18"]}
+			mutate{rename => {" update_service" => "Update Service"}}
 	
 			kv {    source => "column19"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column19"]}
+			mutate{rename => {" aba_customer" => "Aba Customer"}}
 	
 			kv {    source => "column20"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column20"]}
+			mutate{rename => {" date" => "Date"}}
 	
 			kv {    source => "column21"
 	                        value_split => ":"
 	       	                field_split => "/"
 			   }
 			mutate{remove_field => ["column21"]}
+			mutate{rename => {" hour" => "Hour"}}
 	
 			kv {    source => "column22"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column22"]}
+			mutate{rename => {" type" => "Type"}}
 	
 			kv {    source => "column23"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column23"]}
+			mutate{rename => {" Interface" => "Interface"}}
 	
 			kv {    source => "column24"
 	                        value_split => ":"
 	                        field_split => "/"
 			   }
 			mutate{remove_field => ["column24"]}
+			mutate{rename => {" ProductName" => "Product Name"}}			
+
 			mutate{remove_field => ["column25"]}
 		}
 
@@ -166,156 +190,183 @@ filter {
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column2"]}
+			mutate{rename => {" Uuid" => "UUID"}}
 			
 			kv {    source => "column3"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column3"]}
+			mutate{rename => {" SequenceNum" => "Sequence Number"}}
 			
 			kv {    source => "column4"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column4"]}
+			mutate{rename => {" Flags" => "Flags"}}
 
 			kv {    source => "column5"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column5"]}
+			mutate{rename => {" Action" => "Action"}}
 
 			kv {    source => "column6"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column6"]}
+			mutate{rename => {" Origin" => "Origin"}}
 
 			kv {    source => "column7"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column7"]}
+			mutate{rename => {" IfDir" => "IfDir"}}
 
 			kv {    source => "column8"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column8"]}
+			mutate{rename => {" InterfaceName" => "Interface Name"}}
 
 			kv {    source => "column9"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column9"]}
+			mutate{rename => {" Alert" => "Alert"}}
 		
 			kv {    source => "column10"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column10"]}
+			mutate{rename => {" LogId" => "LogID"}}
 
 			kv {    source => "column11"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column11"]}
+			mutate{rename => {" OriginSicName" => "OriginSicName"}}
 
 			kv {    source => "column12"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column12"]}
+			mutate{rename => {" OriginSicName" => "OriginSicNames"}}
 			
 			kv {    source => "column13"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column13"]}
+			mutate{rename => {" log_type" => "Log Type"}}
 
 			kv {    source => "column14"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column14"]}
+			mutate{rename => {" is_first_for_luuid" => "IsFirstForLUUID"}}
 
 			kv {    source => "column15"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column15"]}
+			mutate{rename => {" description" => "Description"}}
 
 			kv {    source => "column16"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column16"]}
+			mutate{rename => {" reason" => "Reason"}}
 
 			kv {    source => "column17"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column17"]}
+			mutate{rename => {" Severity" => "Severity"}}
 
 			kv {    source => "column18"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column18"]}
+			mutate{rename => {" status" => "Status"}}
 
 			kv {    source => "column19"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column19"]}
+			mutate{rename => {" version" => "Version"}}
 
 			kv {    source => "column20"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column20"]}
+			mutate{rename => {" failure_impact" => "Failure Impact"}}
 
 			kv {    source => "column21"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column21"]}
+			mutate{rename => {" update_service" => "Update Service"}}
 
 			kv {    source => "column22"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column22"]}
+			mutate{rename => {" aba_customer" => "Aba Customer"}}
 
 			kv {    source => "column23"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column23"]}
+			mutate{rename => {" date" => "Date"}}
 
 			kv {    source => "column24"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column24"]}
+			mutate{rename => {" hour" => "Hour"}}
 
 			kv {    source => "column25"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column25"]}
+			mutate{rename => {" type" => "Type"}}
 
 			kv {    source => "column26"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column26"]}
+			mutate{rename => {" Interface" => "Interface"}}
 
 			kv {    source => "column27"
                                 value_split => ":"
                                 field_split => "/"
                            }
                         mutate{remove_field => ["column27"]}
+			mutate{rename => {" ProductName" => "Product Name"}}
+
 			mutate{remove_field => ["column28"]}
 		}	
 	
